@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
+#include <wctype.h>
 #include <locale.h>
 
 #define MAXLEN 68
@@ -23,8 +24,10 @@ int main(int argc, char *argv[])
     
     mbstowcs(src, argv[1], len);
 
-    while (src[i] == ' ')
-        res[i++] = ' ';
+    while (iswspace(src[i])) {
+        res[i] = src[i];
+        ++i;
+    }
 
     for ( ; i < len; i++) {
         res[i] = src[i];
